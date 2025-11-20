@@ -1,8 +1,8 @@
-package com.portingdeadmods.examplemod;
+package com.portingdeadmods.researchdxcompat;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public final class ExampleModClientConfig {
+public final class ResearchdXCompatClientConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER

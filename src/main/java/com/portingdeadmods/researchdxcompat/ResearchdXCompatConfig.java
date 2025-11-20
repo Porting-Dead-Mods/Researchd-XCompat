@@ -1,4 +1,4 @@
-package com.portingdeadmods.examplemod;
+package com.portingdeadmods.researchdxcompat;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-public final class ExampleModConfig {
+public final class ResearchdXCompatConfig {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     public static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
@@ -19,7 +19,7 @@ public final class ExampleModConfig {
 
     public static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
             .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", ExampleModConfig::validateItemName);
+            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", ResearchdXCompatConfig::validateItemName);
 
     static final ModConfigSpec SPEC = BUILDER.build();
 

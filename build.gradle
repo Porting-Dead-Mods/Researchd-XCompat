@@ -9,11 +9,6 @@ plugins {
 }
 
 tasks.named('wrapper', Wrapper).configure {
-    // Define wrapper values here so as to not have to always do so when updating gradlew.properties.
-    // Switching this to Wrapper.DistributionType.ALL will download the full gradle sources that comes with
-    // documentation attached on cursor hover of gradle classes and methods. However, this comes with increased
-    // file size for Gradle. If you do switch this to ALL, run the Gradle wrapper task twice afterwards.
-    // (Verify by checking gradle/wrapper/gradle-wrapper.properties to see if distributionUrl now points to `-all`)
     distributionType = Wrapper.DistributionType.BIN
 }
 
@@ -97,10 +92,14 @@ dependencies {
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
     implementation "com.github.Porting-Dead-Mods:Porting-Dead-Libs:${pdl_version}"
+    implementation "com.github.Porting-Dead-Mods:Researchd:${pdl_version}"
 }
 
-def parts = pdl_version.tokenize('.')
-def pdl_nextMinor = "${parts[0]}.${(parts[1].toInteger() + 1)}.0"
+def pdl_parts = pdl_version.tokenize('.')
+def researchd_parts = researchd_version.tokenize('.')
+
+def pdl_nextMinor = "${pdl_parts[0]}.${(pdl_parts[1].toInteger() + 1)}.0"
+def researchd_nextMinor = "${researchd_parts[0]}.${(researchd_parts[1].toInteger() + 1)}.0-alpha"
 
 var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
@@ -115,7 +114,9 @@ var generateModMetadata = tasks.register("generateModMetadata", ProcessResources
             mod_authors            : mod_authors,
             mod_description        : mod_description,
             pdl_version            : pdl_version,
-            pdl_nextMinor          : pdl_nextMinor
+            pdl_nextMinor          : pdl_nextMinor,
+            researchd_version      : researchd_version,
+            researchd_nextMinor    : researchd_nextMinor,
     ]
     inputs.properties replaceProperties
     expand replaceProperties

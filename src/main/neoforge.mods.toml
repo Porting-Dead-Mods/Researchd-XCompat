@@ -20,6 +20,13 @@ description='''${mod_description}'''
 #file="META-INF/accesstransformer.cfg"
 
 [[dependencies.${mod_id}]]
+modId="researchd"
+type="required"
+versionRange="[${researchd_version}, ${researchd_nextMinor})"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies.${mod_id}]]
 modId="portingdeadlibs"
 type="required"
 versionRange="[${pdl_version}, ${pdl_nextMinor})"
