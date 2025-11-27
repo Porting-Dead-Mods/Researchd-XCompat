@@ -1,9 +1,11 @@
 package com.portingdeadmods.researchdxcompat;
 
-import com.portingdeadmods.portingdeadlibs.api.blockentities.ContainerBlockEntity;
+import com.portingdeadmods.researchdxcompat.data.ResearchdXCompatAttachments;
+import com.portingdeadmods.researchdxcompat.registries.ResearchEffectSerializers;
+import com.portingdeadmods.researchdxcompat.registries.ResearchMethodSerializers;
+import com.portingdeadmods.researchdxcompat.registries.ResearchSerializers;
 import net.minecraft.resources.ResourceLocation;
-import net.neoforged.neoforge.capabilities.Capabilities;
-import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.fml.ModList;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 import org.slf4j.Logger;
@@ -17,11 +19,16 @@ import net.neoforged.fml.ModContainer;
 
 @Mod(ResearchdXCompat.MODID)
 public final class ResearchdXCompat {
-    public static final String MODID = "examplemod";
-    public static final String MODNAME = "Example Mod";
+    public static final String MODID = "researchdxcompat";
+    public static final String MODNAME = "Researchd XCompat";
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public ResearchdXCompat(IEventBus modEventBus, ModContainer modContainer) {
+        ResearchEffectSerializers.SERIALIZERS.register(modEventBus);
+        ResearchMethodSerializers.SERIALIZERS.register(modEventBus);
+        ResearchSerializers.SERIALIZERS.register(modEventBus);
+        ResearchdXCompatAttachments.ATTACHMENTS.register(modEventBus);
+
         modEventBus.addListener(this::registerPayloads);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, ResearchdXCompatConfig.SPEC);
@@ -33,5 +40,9 @@ public final class ResearchdXCompat {
 
     public static ResourceLocation rl(String path) {
         return ResourceLocation.fromNamespaceAndPath(MODID, path);
+    }
+
+    public static boolean isIELoaded() {
+        return ModList.get().isLoaded("immersiveengineering");
     }
 }

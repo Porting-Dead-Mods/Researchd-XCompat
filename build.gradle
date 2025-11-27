@@ -21,6 +21,10 @@ repositories {
         name = "Jared's maven"
         url = "https://maven.blamejared.com/"
     }
+    maven {
+        name = "Lat"
+        url "https://maven.latvian.dev/releases"
+    }
 
     // Porting Dead Libs
     maven { url 'https://jitpack.io' }
@@ -87,12 +91,23 @@ configurations {
 }
 
 dependencies {
+    // Util
     compileOnly "mezz.jei:jei-${minecraft_version}-common-api:${jei_version}"
     compileOnly "mezz.jei:jei-${minecraft_version}-neoforge-api:${jei_version}"
     localRuntime "mezz.jei:jei-${minecraft_version}-neoforge:${jei_version}"
 
+    compileOnly "dev.latvian.mods:kubejs-neoforge:${kubejs_version}"
+    compileOnly "dev.latvian.mods:rhino-neoforge:${rhino_version}"
+    localRuntime "dev.latvian.mods:kubejs-neoforge:${kubejs_version}"
+    localRuntime "dev.latvian.mods:rhino-neoforge:${rhino_version}"
+
+    // Compat
+    compileOnly "blusunrize.immersiveengineering:ImmersiveEngineering:${ie_version}"
+    localRuntime "blusunrize.immersiveengineering:ImmersiveEngineering:${ie_version}"
+
+    // Req
     implementation "com.github.Porting-Dead-Mods:Porting-Dead-Libs:${pdl_version}"
-    implementation "com.github.Porting-Dead-Mods:Researchd:${pdl_version}"
+    implementation "com.github.Porting-Dead-Mods:Researchd:${researchd_version}"
 }
 
 def pdl_parts = pdl_version.tokenize('.')
